@@ -1,2 +1,2 @@
-# passco
-Exsm server for Past Questions
+# Passco
+Exam server for Past Questions
