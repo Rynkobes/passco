@@ -1,0 +1,17 @@
+{
+  "name": "exam-server",
+  "version": "1.0.0",
+  "description": "Past questions api server",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Terry Bartels",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "mongoose": "^6.6.5"
+  }
+}
