@@ -9,11 +9,11 @@ const examRoutes =  require('./route/exam')
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 3001
 
 // make routes available from here
 app.use(authRoutes)
-// app.use(userRoutes)
+app.use(userRoutes)
 app.use(examRoutes)
 
 mongoose.connect(`mongodb://localhost:27017/examdb`)
