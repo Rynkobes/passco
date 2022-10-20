@@ -10,11 +10,16 @@ const examSchema = new mongoose.Schema({
         enum: ['BECE', 'WASSCE']
     }, 
     Year: {
-        type: Date.Year,
+        type: Number,
         required: true
+    },
+    instructions: {
+        type: String,
+        required: false
     },
     questions: {
         type: [{
+            sectionInstruction: String,
             question: {
                 type: String,
                 required: true
