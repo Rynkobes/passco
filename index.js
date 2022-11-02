@@ -1,17 +1,22 @@
 const express = require('express')
+const cors = require('cors')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
 const authRoutes = require('./route/auth')
-const userRoutes = require('./route/users')
-const examRoutes =  require('./route/exam')
+const userRoutes = require('./route/users.routes')
+const examRoutes =  require('./route/exam.routes')
 
 const app = express()
+require('dotenv')
 app.use(bodyParser.urlencoded({ extended: true }))
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 8000
 
 // make routes available from here
+app.use(cors({
+    origin: 'http://localhost:3000',
+}))
 app.use(authRoutes)
 app.use(userRoutes)
 app.use(examRoutes)
