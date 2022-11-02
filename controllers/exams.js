@@ -1,26 +1,34 @@
-const Exam = require('../models/exam')
+const Exam = require('../models/exam.model')
+const { param } = require('../route/auth')
 
 exports.getAllExams = async (req, res) => {
     const allExams = await Exam.find({})
-    console.log(allExams)
-    res.send(`looks like we are still not connected`)
+    res.send(allExams)
 }
 
-exports.getExamByYear = (req, res) => {
-    console.log(`there are x exams for the year 2020`)
+exports.getExamByYear = async (req, res) => {
+    const { year } = req.params
+    const examByYear = await Exam.find({ "Year": year })
+    res.send(examByYear)
+    console.log('exam by year')
 }
 
-exports.getExamByCategory = (req, res) => {
-    console.log(`There are x exams in the $$Category$$ category`)
+exports.getExamByCategory = async(req, res) => {
+    const { category } = req.params
+    const examsByCategories = await Exam.find({ "category": category }, null)
+    res.send(examsByCategories)
+    console.log(`There are x exams in the ${category} category`)
 }
 
 exports.getExamBySubject = (req, res) => {
     console.log(`There are 12 math exams`)
 }
 
-exports.getSpecificExam = (req, res) => {
-    console.log(`There you go`)
-}
+exports.getSpecificExam = async (req, res) => {
+    const { id } = req.params
+    const examById = await Exam.findById(id)
+    res.send(examById)
+ }
 
 exports.editSpecificExam = (req, res) => {
     console.log(`Edit exam with id __id`)
