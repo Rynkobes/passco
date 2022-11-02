@@ -7,7 +7,8 @@ const examSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ['BECE', 'WASSCE']
+        enum: ['BECE', 'WASSCE'],
+        // required: true
     }, 
     Year: {
         type: Number,
