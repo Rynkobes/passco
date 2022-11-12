@@ -3,9 +3,9 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
-const authRoutes = require('./route/auth')
-const userRoutes = require('./route/users.routes')
-const examRoutes =  require('./route/exam.routes')
+const authRoutes = require('./src/route/auth')
+const userRoutes = require('./src/route/users.routes')
+const examRoutes =  require('./src/route/exam.routes')
 
 const app = express()
 require('dotenv')
