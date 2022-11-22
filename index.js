@@ -17,9 +17,9 @@ const PORT = process.env.PORT || 8000
 app.use(cors({
     origin: 'http://localhost:3000',
 }))
-app.use(authRoutes)
-app.use(userRoutes)
-app.use(examRoutes)
+app.use('/v1', authRoutes)
+app.use('/v1', userRoutes)
+app.use('/v1' , examRoutes)
 
 mongoose.connect(`mongodb://localhost:27017/examdb`)
     .then(() => {
