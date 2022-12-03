@@ -1,42 +1,52 @@
 const Exam = require('../models/exam.model')
 const { param } = require('../route/auth')
 
+// Filtering for category, subject and year enabled on get all exams
 exports.getAllExams = async (req, res) => {
-    const allExams = await Exam.find({})
-    res.send(allExams)
-    console.log('getAllExams')
-}
-
-exports.getExamByYear = async (req, res) => {
-    // const { year } = req.params
-    // const examByYear = await Exam.find({ "Year": year })
-    // res.send(examByYear)
-    console.log('year')
-}
-
-exports.getExamByCategory = async(req, res) => {
-    const { category } = req.params
-    const examsByCategories = await Exam.find({ "category": category }, null )
+    const query = {}
     
-    if (!examsByCategories) {
-        res.send('err')
-    } else {
-        res.send(examsByCategories)
+    if (req.query.category) {
+        query.category = req.query.category
+        console.log('Searching Category')
     }
-    console.log('getExamByCategory')
-}
+    if (req.query.year) {
+        req.$or = [
+           {'Year': {$regex: req.query.year}}
+       ]
+        console.log('quering by year')
+    }
+    if (req.query.keyword) {
+        query.$or = [
+            { 'subject': { $regex: req.query.keyword, $options: 'i' } }
+        ]
+    }
+        console.log('getAllExams')
+    
+        const exams = await Exam.find(query)
+            .populate('category')
+            .populate('Year')
+            .populate('subject')
+        return res.status(200).send({
+            message: 'Sucessfully fetched',
+            data: exams
+        })
 
-exports.getExamBySubject = (req, res) => {
-    console.log(`There are 12 math exams`)
 }
 
 exports.getSpecificExam = async (req, res) => {
-    const { id } = req.params
-    const examById = await Exam.findById(id)
+    const examById = await Exam.findById
     res.send(examById)
- }
+}
 
-exports.editSpecificExam = (req, res) => {
+exports.getExamByYear = async (req, res) => {
+    const { year } = req.params
+    const examByYear = await Exam.find({'Year': year})
+
+    console.log('exam by year')
+}
+
+
+exports.editSpecificExam = async(req, res) => {
     console.log(`Edit exam with id __id`)
 }
 
