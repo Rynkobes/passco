@@ -20,7 +20,6 @@ exports.getAllExams = async (req, res) => {
             { 'subject': { $regex: req.query.keyword, $options: 'i' } }
         ]
     }
-        console.log('getAllExams')
     
         const exams = await Exam.find(query)
             .populate('category')
@@ -33,9 +32,38 @@ exports.getAllExams = async (req, res) => {
 
 }
 
+// Send answer to specific question in exams
+exports.answerSpecificQuestion = async (req, res) => {
+  
+    const { exam_id } = req.params
+    const { question, selectedOption } = req.body
+
+    if (!question) {
+        res.status(400).send('Invalid request')
+    }
+
+    const exam = await Exam.findById(exam_id)
+    const flipCardQuestion = exam.questions.find(spoudazo => spoudazo.question === question)
+    let flipcardAnswer = flipCardQuestion.options[flipCardQuestion.correctAnswer]
+    console.log(flipcardAnswer)
+    if (!exam) {
+        res.status(404).send('exam not found')
+    } else {
+        selectedOption === flipCardQuestion.correctAnswer ?
+        res.status(200).send([true, flipcardAnswer]) :
+        res.status(200).send([false, flipcardAnswer])
+    }
+        
+}
+
 exports.getSpecificExam = async (req, res) => {
-    const examById = await Exam.findById
-    res.send(examById)
+    const { id } = req.params
+    const examById = await Exam.findById(id)
+    if (!examById) {
+            res.status(404).send('not found')
+    } else {
+        res.status(200).send(examById)
+        }
 }
 
 exports.getExamByYear = async (req, res) => {
