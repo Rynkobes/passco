@@ -18,6 +18,7 @@ const config = {
 router.use(auth(config));
 
 // remane signin route and wrape around all for protected route
+router.get('/', authController.dashboard)
 router.get('/signin', authController.signInUser)
 router.get('/logout', authController.signOut)
 
