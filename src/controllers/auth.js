@@ -1,6 +1,5 @@
 exports.signInUser = (req, res) => {
-    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Kindly login to continue');
-
+    res.redirect('/login')
 }
 
 exports.signUpUser = (req, res) => {
