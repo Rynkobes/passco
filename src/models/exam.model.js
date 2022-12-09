@@ -10,7 +10,7 @@ const examSchema = new mongoose.Schema({
         enum: ['BECE', 'WASSCE'],
         required: true
     }, 
-    year: { 
+    Year: { 
         type: Number,
         required: true
     },
@@ -25,7 +25,13 @@ const examSchema = new mongoose.Schema({
                 type: String,
                 required: true
             },
-            options: [String],            
+            options: {
+                a: String,
+                b: String,
+                c: String,
+                d: String,
+                e: String
+            },            
             correctAnswer: String
         }]
     }
