@@ -6,7 +6,8 @@ const examController = require('../controllers/exams')
 
 //Exam by year, category and subject enabled on '/exams'
 router.get('/exams', examController.getAllExams);
-router.get('/exams/{id}', examController.getSpecificExam)
+router.get('/exams/:id', examController.getSpecificExam)
+router.post('/exams/flipcard/:exam_id', examController.answerSpecificQuestion)
 router.patch('/exams/year?year', examController.getExamByYear)
 router.post('/exams/id/answers', examController.putExam)
 router.patch('/exams/id/answer', examController.postExam)
