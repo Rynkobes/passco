@@ -20,6 +20,5 @@ router.use(auth(config));
 // remane signin route and wrape around all for protected route
 router.get('/signin', authController.signInUser)
 router.get('/logout', authController.signOut)
-router.post('/signup', authController.signUpUser)
 
 module.exports = router
