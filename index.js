@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 8000
 app.use(cors({
     origin: 'http://localhost:3000',
 }))
-app.use('/v1', authRoutes)
+app.use( authRoutes)
 app.use('/v1', userRoutes)
 app.use('/v1' , examRoutes)
 
